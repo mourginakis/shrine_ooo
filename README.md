@@ -3,15 +3,25 @@
 <https://xljsj-eiaaa-aaaag-qbz7a-cai.ic0.app>
 
 
-## Running Local
+## Local Development
+#### Using Vite Hot Module Reloading
 ```bash
 $ dfx start --background --clean
-$ dfx deploy
+$ dfx deploy shrine_backend
+$ npm run dev
 $ dfx stop
 ```
 
-
-## Running Mainnet
+#### Testing Prod on Local
 ```bash
+$ npm run build
+$ dfx deploy
+```
+
+
+## Deploying to Mainnet
+```bash
+$ npm run build
 $ dfx deploy --network ic
 ```
+
