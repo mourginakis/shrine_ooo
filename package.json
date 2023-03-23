@@ -1,0 +1,9 @@
+{
+  "name": "shrine_ooo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "dfx generate"
+  }
+}

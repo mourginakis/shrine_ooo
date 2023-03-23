@@ -1,0 +1,29 @@
+{
+    "canisters": {
+        "shrine_backend": {
+            "main": "src/shrine_backend/main.mo",
+            "type": "motoko"
+        },
+        "shrine_frontend": {
+            "dependencies": [
+                "shrine_backend"
+            ],
+            "frontend": {
+                "entrypoint": "src/shrine_frontend/src/index.html"
+            },
+            "source": [
+                "src/shrine_frontend/assets",
+                "dist/shrine_frontend"
+            ],
+            "type": "assets"
+        }
+    },
+    "defaults": {
+        "build": {
+            "args": "",
+            "packtool": ""
+        }
+    },
+    "output_env_file": ".env",
+    "version": 1
+}
