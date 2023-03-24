@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-interface Props {}
+interface Props {};
 
 const Counter: React.FC<Props> = () => {
   const [count, setCount] = useState(0);
@@ -14,7 +14,8 @@ const Counter: React.FC<Props> = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center my-14">
+      <h1 className="text-2xl">ExampleCounter</h1>
       <h1 className="text-4xl font-bold">{count}</h1>
       <div className="flex space-x-2">
         <button

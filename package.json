@@ -10,6 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@dfinity/agent": "^0.15.4",
+    "@dfinity/identity": "^0.15.4",
+    "@dfinity/identity-secp256k1": "^0.15.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
