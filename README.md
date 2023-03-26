@@ -21,6 +21,8 @@ $ dfx deploy
 
 ## Deploying to Mainnet
 ```bash
+# TODO: autoset dfx_network
+$ export DFX_NETWORK='ic'
 $ npm run build
 $ dfx deploy --network ic
 ```

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite src/shrine_frontend",
+    "dev": "DFX_NETWORK='local' vite src/shrine_frontend",
     "build": "dfx generate && tsc && vite build src/shrine_frontend",
     "preview": "vite preview src/shrine_frontend",
     "test": "echo \"Error: no test specified\" && exit 1"

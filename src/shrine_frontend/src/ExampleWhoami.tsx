@@ -4,47 +4,7 @@ import { Secp256k1KeyIdentity } from "@dfinity/identity-secp256k1";
 import { Principal } from "@dfinity/principal";
 
 
-
-// ----------------- BEGIN AUTH ----------------- //
-
-// You can either import the actor from the backend like so
-// not currenlty working due to the fetchRootKey() call returning a parsing error:
-
-// console.log(process.env.SHRINE_BACKEND_CANISTER_ID);
-// import { idlFactory, shrine_backend } from '../../declarations/shrine_backend';
-
-
-
-// ----------------- OR ----------------- //
-
-
-// You can create your own actor in here like so:
-// for some reason, importing from ../../declarations/shrine_backend
-// calls fetchRootKey, which gives a weird parse error that I think has to
-// do with some globals thing.
-// @ts-expect-error
-import { idlFactory } from '../../declarations/shrine_backend/shrine_backend.did.js';
-import { _SERVICE } from '../../declarations/shrine_backend/shrine_backend.did';
-
-
-// use the authed testing identity, or set identity to null to use the anonymous identity
-const identity = Secp256k1KeyIdentity.fromParsedJson(
-    STATIC_CONTEXT.testingIdentityJSON
-);
-
-const agent = new HttpAgent({ host: STATIC_CONTEXT.host, identity: identity});
-if (STATIC_CONTEXT.network === "local") { agent.fetchRootKey() };
-
-const shrine_backend: ActorSubclass<_SERVICE> = Actor.createActor(
-    idlFactory,
-    { agent, canisterId: STATIC_CONTEXT.canisterId }
-);
-
-
-// ----------------- END ----------------- //
-
-
-
+import { shrine_backend, shrine_backend_authed } from './auth';
 
 interface Props {};
 
