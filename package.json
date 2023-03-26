@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "DFX_NETWORK='local' vite src/shrine_frontend",
+    "dev": "vite src/shrine_frontend",
     "build": "dfx generate && tsc && vite build src/shrine_frontend",
     "preview": "vite preview src/shrine_frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,7 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
+    "dotenv": "^16.0.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "typescript": "^5.0.2",
