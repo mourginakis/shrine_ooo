@@ -19,3 +19,6 @@ dist/
 
 #.env
 .env
+
+# rust target
+src/shrine_backend_tests/target/

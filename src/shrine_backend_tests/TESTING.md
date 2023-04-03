@@ -2,5 +2,7 @@
 ```bash
 $ dfx start --background --clean
 $ dfx deploy
-$ rust-script src/test/test.rs
+$ cargo test
+# or 
+$ cargo test -- --nocapture
 ```
