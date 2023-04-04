@@ -16,8 +16,12 @@ $ dfx stop
 
 #### Testing Prod on Local
 ```bash
+# To test the interface, visit the frontend url:
 $ dfx deploy
+# To run the e2e tests:
+$ npm run coverage
 ```
+
 
 
 ## Deploying to Mainnet
