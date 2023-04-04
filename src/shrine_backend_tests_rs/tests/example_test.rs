@@ -1,7 +1,7 @@
 use reqwest::Error;
 use chrono::{Utc};
 
-use shrine_backend_tests::add;
+use shrine_backend_tests_rs::add;
 
 #[test]
 fn test_addition() {
