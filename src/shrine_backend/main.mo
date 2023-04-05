@@ -9,7 +9,7 @@ import Time      "mo:base/Time";
 
 import Trove "trove";
 
-actor {
+actor Self {
 
     //
     // State Management
@@ -52,6 +52,38 @@ actor {
         );
         return Buffer.toArray(titles);
     };
+
+
+
+    //
+    // ICP Transfer
+    type Subaccount = Blob;
+    type Account = { 
+        owner : Principal;
+        subaccount : ?Subaccount;
+    };
+
+    let ledgerCanister : actor { icrc1_balance_of : (Account) -> async Nat } = actor ("ryjl3-tyaaa-aaaaa-aaaba-cai");
+
+    public shared func getThisCanisterPrincipal() : async Principal {
+        Principal.fromActor(Self)
+    };
+    public shared func getThisCanisterAccount() : async () {
+        Prelude.nyi()
+    };
+
+    // This function is an example to show how to get the balance of another principal
+    public shared func getForeignCanisterBalance(principalId : Text): async Nat{
+        let owner = Principal.fromText(principalId);
+        await ledgerCanister.icrc1_balance_of({owner; subaccount = null;})
+    };
+
+    public shared func getThisCanisterBalance() : async Nat {
+        Prelude.nyi();
+    };
+
+
+
 
 
 
