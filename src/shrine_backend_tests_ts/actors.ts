@@ -1,6 +1,8 @@
 import { Secp256k1KeyIdentity } from "@dfinity/identity-secp256k1";
 import { Principal } from "@dfinity/principal";
 import { Actor, HttpAgent, Identity } from "@dfinity/agent";
+import type { ActorSubclass } from "@dfinity/agent";
+
 
 
 // Vitest unfortunately doesn't load the entire vite.config.ts file,
@@ -12,7 +14,7 @@ import { Actor, HttpAgent, Identity } from "@dfinity/agent";
 
 // This throws an error because it tries to read types from the .did.d.ts file
 // @ts-ignore   // suppresses error reporting
-import { idlFactory } from "../declarations/shrine_backend/shrine_backend.did.js";
+import { _SERVICE, idlFactory } from "../declarations/shrine_backend/shrine_backend.did.js";
 
 
 const identity = Secp256k1KeyIdentity.fromParsedJson(
@@ -33,12 +35,12 @@ agent_authed.fetchRootKey();
 
 
 // process.env.SHRINE_BACKEND_CANISTER_ID gets replaced by vite at build time
-const shrine_backend_anony = Actor.createActor(idlFactory, {
+const shrine_backend_anony: ActorSubclass<_SERVICE> = Actor.createActor(idlFactory, {
     agent: agent_anony,
     canisterId: process.env.SHRINE_BACKEND_CANISTER_ID as unknown as Principal,
 });
 
-const shrine_backend_authed = Actor.createActor(idlFactory, {
+const shrine_backend_authed: ActorSubclass<_SERVICE> = Actor.createActor(idlFactory, {
     agent: agent_authed,
     canisterId: process.env.SHRINE_BACKEND_CANISTER_ID as unknown as Principal,
 });
