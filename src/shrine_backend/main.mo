@@ -22,10 +22,11 @@ actor {
     public shared ({ caller }) func createTrove(
         title: Text, description : Text, tags : [Text]
     ) : async Result.Result<Text, Text> {
+        if (Principal.isAnonymous(caller)) {return #err("Error: You must be logged in to create a trove.")};
         let timeNanoseconds = Time.now();
         let newTrove = Trove.Trove(title, description, tags, timeNanoseconds);
         troves.add(newTrove);
-        return #ok("Success");
+        return #ok("Trove successfully created.");
     };
 
     //

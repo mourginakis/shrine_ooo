@@ -9,7 +9,7 @@ describe('createTrove', () => {
         const result = await shrine_backend_anony.createTrove(
             'testTrove', 'test', ['tag1', 'tag2']
         );
-        expect(result).toEqual("Error: You must be logged in to create a trove.");
+        expect(result).toEqual({ 'err': 'Error: You must be logged in to create a trove.' });
     });
 
 
@@ -17,7 +17,7 @@ describe('createTrove', () => {
         const result = await shrine_backend_authed.createTrove(
             'testTrove', 'test', ['tag1', 'tag2']
         );
-        expect(result).toEqual("Trove successfully created.");
+        expect(result).toEqual({ 'ok': 'Trove successfully created.' });
     });
 
     
