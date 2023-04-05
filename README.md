@@ -19,7 +19,7 @@ $ dfx stop
 # To test the interface, visit the frontend url:
 $ dfx deploy
 # To run the e2e tests:
-$ npm run coverage
+$ npm run test
 ```
 
 
