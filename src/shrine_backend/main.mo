@@ -6,8 +6,10 @@ import Text      "mo:base/Text";
 import Principal "mo:base/Principal";
 import Array     "mo:base/Array";
 import Time      "mo:base/Time";
+import Option    "mo:base/Option";
 
 import Trove "trove";
+import NNSLedger "nnsledger";
 
 actor Self {
 
@@ -55,36 +57,38 @@ actor Self {
 
 
 
+
     //
-    // ICP Transfer
-    type Subaccount = Blob;
-    type Account = { 
-        owner : Principal;
-        subaccount : ?Subaccount;
+    // ICP Transfer - ICRC1 Interface
+    //   --  let thisCanisterPrincipal = Principal.fromActor(Self);
+    let ledgerCanister : NNSLedger.ICRC1Interface = actor("ryjl3-tyaaa-aaaaa-aaaba-cai");
+
+    public func getThisCanisterBalance() : async Nat {
+        // Each ICP token is divisible 10^8 times.
+        // The return value here is measured in 10^-8 of an ICP token.
+        let selfPrincipal = Principal.fromActor(Self);
+        let selfDefaultAccount: NNSLedger.Account = {owner = selfPrincipal; subaccount = null};
+        await ledgerCanister.icrc1_balance_of(selfDefaultAccount)
     };
 
-    let ledgerCanister : actor { icrc1_balance_of : (Account) -> async Nat } = actor ("ryjl3-tyaaa-aaaaa-aaaba-cai");
-
-    public shared func getThisCanisterPrincipal() : async Principal {
-        Principal.fromActor(Self)
-    };
-    public shared func getThisCanisterAccount() : async () {
-        Prelude.nyi()
+    public func getTargetCanisterBalance(targetPrincipal: Principal, subaccount: ?[Nat8]) : async Nat {
+        let targetAccount: NNSLedger.Account = {owner = targetPrincipal; subaccount};
+        await ledgerCanister.icrc1_balance_of(targetAccount);
     };
 
-    // This function is an example to show how to get the balance of another principal
-    public shared func getForeignCanisterBalance(principalId : Text): async Nat{
-        let owner = Principal.fromText(principalId);
-        await ledgerCanister.icrc1_balance_of({owner; subaccount = null;})
+    public func transferTokensToPrincipal(targetPrincipal: Principal, amt: Nat) : async NNSLedger.Result {
+        let targetDefaultAccount: NNSLedger.Account = {owner = targetPrincipal; subaccount = null};
+        let transferArg: NNSLedger.TransferArg = {
+            to              = targetDefaultAccount;
+            fee             = null;
+            memo            = null;
+            from_subaccount = null;
+            created_at_time = null;
+            amount          = amt;
+        };
+        let result = await ledgerCanister.icrc1_transfer(transferArg);
+        result // errors will just propogate
     };
-
-    public shared func getThisCanisterBalance() : async Nat {
-        Prelude.nyi();
-    };
-
-
-
-
 
 
 
