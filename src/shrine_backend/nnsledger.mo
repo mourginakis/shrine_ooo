@@ -9,11 +9,29 @@ import Principal "mo:base/Principal";
 
 // A module for interacting with the Ledger Canister
 // NNS Ledger: ryjl3-tyaaa-aaaaa-aaaba-cai
-// Reference:  
-//   https://github.com/dfinity/examples/tree/master/motoko/ledger-transfer
 
 // The NNS Ledger canister now comes with an ICRC1 Interface which
-// makes interacting with it significantly easier.
+// makes interacting with it significantly easier. This interface identifies
+// accounts by the `Account` type defined below. It is a record of the
+// principal and an optional subaccount.
+
+// The other, traditional interface identifies accounts by a 32 byte array,
+// defined by the `to` field in the `TransferArgs` type.
+// The legacy interface has been omitted from this file.
+// It is generated deterministically by a principal and a nonce (the subaccount)
+// such that:
+//   -- let h = sha224("\x0Aaccount-id" || principal || subaccount)
+//   -- let accountIdentifier = CRC32(h) || h
+// Reference:
+//   https://github.com/dfinity/examples/tree/master/motoko/ledger-transfer
+
+// The default account is generated with a subaccount=null.
+
+// This interface file was almost completely generated from the motoko option
+// on the Ledger Canister entry on Canlista:
+// https://k7gat-daaaa-aaaae-qaahq-cai.ic0.app/listing/nns-ledger-10244/ryjl3-tyaaa-aaaaa-aaaba-cai
+
+
 
 module {
 
