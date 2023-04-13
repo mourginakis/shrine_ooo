@@ -23,3 +23,6 @@ dist/
 
 # rust target
 src/shrine_backend_tests_rs/target/
+
+# binaries
+idl2json
