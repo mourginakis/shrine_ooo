@@ -1,6 +1,6 @@
 import Prelude   "mo:base/Prelude";
 import HashMap   "mo:base/HashMap";
-import Principal "mo:base/Principal"
+import Principal "mo:base/Principal";
 
 // One day this will have to be an actor class to be able to scale
 // actor class Trove () {
