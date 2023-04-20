@@ -18,8 +18,8 @@ import Principal "mo:base/Principal";
 // The other, traditional interface identifies accounts by a 32 byte array,
 // defined by the `to` field in the `TransferArgs` type.
 // The legacy interface has been omitted from this file.
-// It is generated deterministically by a principal and a nonce (the subaccount)
-// such that:
+// It is generated deterministically by a principal and a
+// numerical displacement (the subaccount) such that:
 //   -- let h = sha224("\x0Aaccount-id" || principal || subaccount)
 //   -- let accountIdentifier = CRC32(h) || h
 // Reference:
