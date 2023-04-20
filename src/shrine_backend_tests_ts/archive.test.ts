@@ -6,7 +6,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 // This throws an error because it tries to read types from the .did.d.ts file
 // @ts-ignore   // suppresses error reporting
-import { _SERVICE, idlFactory } from "../nns_interfaces/archive/archive.did.js";
+import { GetBlocksResult, _SERVICE, idlFactory } from "../nns_interfaces/archive/archive.did.js";
 
 
 
@@ -25,7 +25,9 @@ const archiveCanister: ActorSubclass<_SERVICE> = Actor.createActor(idlFactory, {
 import { execSync } from 'child_process';
 
 // equivalent to calling: archiveCanister.get_blocks({start: start, length: length});
-const getBlocksWorkaround = (start: bigint, length: bigint) => {
+// Example call print to console:
+// console.log(JSON.stringify(getBlocksWorkaround(90000n, 2n), null, 2));
+const getBlocksWorkaround = (start: bigint, length: bigint): GetBlocksResult => {
     // needed: https://github.com/dfinity/idl2json
     // compile the binary and put it in the root of this repo (already in gitignore)
     const cmd = `dfx canister --network ic call "${ARCHIVE_CANISTER_ID}" ` +
@@ -33,10 +35,8 @@ const getBlocksWorkaround = (start: bigint, length: bigint) => {
         `--candid ${process.cwd()}/src/nns_interfaces/archive/archive.did` +
         `| ${process.cwd()}/idl2json`;
     const result: Buffer = execSync(cmd);
-    const parsed_result = JSON.parse(result.toString());
-    return parsed_result.Ok;
+    return JSON.parse(result.toString()) as GetBlocksResult;
 };
-
 
 
 describe("archive", () => {
@@ -44,8 +44,11 @@ describe("archive", () => {
         it("pull the 20 first blocks", async () => {
             // this is broken:
             // const result = await archiveCanister.get_blocks({start: 20n, length: 4n});
-            const result = await getBlocksWorkaround(0n, 20n).blocks.length;
-            expect(result).toEqual(20);
+            const result = await getBlocksWorkaround(0n, 20n);
+            if ('Err' in result) {
+                throw new Error(result.Err as unknown as string);
+            };
+            expect(result.Ok.blocks.length).toEqual(20);
         });
     });
 });
