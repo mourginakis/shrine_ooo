@@ -63,12 +63,14 @@ actor Self {
     //   --  let thisCanisterPrincipal = Principal.fromActor(Self);
     let ledgerCanister : NNSLedger.ICRC1Interface = actor("ryjl3-tyaaa-aaaaa-aaaba-cai");
 
-    public func getThisCanisterBalance() : async Nat {
+    public func getSelfAccountBalance(subaccount: ?[Nat8]) : async Nat {
+        // subaccount = null represents the default account
         // Each ICP token is divisible 10^8 times.
         // The return value here is measured in 10^-8 of an ICP token.
         let selfPrincipal = Principal.fromActor(Self);
-        let selfDefaultAccount: NNSLedger.Account = {owner = selfPrincipal; subaccount = null};
-        await ledgerCanister.icrc1_balance_of(selfDefaultAccount)
+        let targetAccount: NNSLedger.Account = {owner = selfPrincipal; subaccount};
+        await ledgerCanister.icrc1_balance_of(targetAccount)
+
     };
 
     public func getTargetCanisterBalance(targetPrincipal: Principal, subaccount: ?[Nat8]) : async Nat {
