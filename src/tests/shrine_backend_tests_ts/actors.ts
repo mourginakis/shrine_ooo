@@ -13,6 +13,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 
 // This throws an error because it tries to read types from the .did.d.ts file
+// https://forum.dfinity.org/t/idlfactory-not-in-d-ts/14143/11
 // @ts-ignore   // suppresses error reporting
 import { _SERVICE, idlFactory } from "src/declarations/shrine_backend/shrine_backend.did.js";
 
