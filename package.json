@@ -7,9 +7,9 @@
     "dev": "vite src/shrine_frontend",
     "build": "dfx generate && tsc && vite build src/shrine_frontend",
     "preview": "vite preview src/shrine_frontend",
-    "test": "vitest run src/tests/shrine_backend_tests_ts --config ./src/shrine_frontend/vite.config.ts",
-    "test:ledger": "vitest run src/tests/shrine_backend_tests_ts/ledger.test.ts",
-    "test:archive": "vitest run src/tests/shrine_backend_tests_ts/archive.test.ts"
+    "test": "vitest run src/tests --config ./src/shrine_frontend/vite.config.ts",
+    "test:ledger": "vitest run src/tests/ledger.test.ts",
+    "test:archive": "vitest run src/tests/archive.test.ts"
   },
   "dependencies": {
     "@dfinity/agent": "^0.15.4",
