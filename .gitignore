@@ -12,7 +12,10 @@
 .vessel/
 
 # generated files
-src/declarations/
+src/declarations/*
+!src/declarations/ledger/
+!src/declarations/archive/
+!src/declarations/README.md
 
 # frontend code
 node_modules/

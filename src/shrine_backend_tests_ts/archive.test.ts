@@ -6,7 +6,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 // This throws an error because it tries to read types from the .did.d.ts file
 // @ts-ignore   // suppresses error reporting
-import { GetBlocksResult, _SERVICE, idlFactory } from "../nns_interfaces/archive/archive.did.js";
+import { GetBlocksResult, _SERVICE, idlFactory } from "src/declarations/archive/archive.did.js";
 
 
 
@@ -32,7 +32,7 @@ const getBlocksWorkaround = (start: bigint, length: bigint): GetBlocksResult => 
     // compile the binary and put it in the root of this repo (already in gitignore)
     const cmd = `dfx canister --network ic call "${ARCHIVE_CANISTER_ID}" ` +
         `get_blocks '(record {start = ${start} : nat64; length = ${length} : nat64} )' ` +
-        `--candid ${process.cwd()}/src/nns_interfaces/archive/archive.did` +
+        `--candid ${process.cwd()}/src/declarations/archive/archive.did` +
         `| ${process.cwd()}/idl2json`;
     const result: Buffer = execSync(cmd);
     return JSON.parse(result.toString()) as GetBlocksResult;

@@ -6,7 +6,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 // This throws an error because it tries to read types from the .did.d.ts file
 // @ts-ignore   // suppresses error reporting
-import { Account, TransferArg, _SERVICE, idlFactory } from "../nns_interfaces/ledger/ledger.did.js";
+import { Account, TransferArg, _SERVICE, idlFactory } from "src/declarations/ledger/ledger.did.js";
 
 
 
