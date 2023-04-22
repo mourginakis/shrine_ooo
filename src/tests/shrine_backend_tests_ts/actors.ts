@@ -14,7 +14,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 // This throws an error because it tries to read types from the .did.d.ts file
 // @ts-ignore   // suppresses error reporting
-import { _SERVICE, idlFactory } from "../declarations/shrine_backend/shrine_backend.did.js";
+import { _SERVICE, idlFactory } from "src/declarations/shrine_backend/shrine_backend.did.js";
 
 
 const identity = Secp256k1KeyIdentity.fromParsedJson(
