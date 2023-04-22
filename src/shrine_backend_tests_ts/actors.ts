@@ -6,7 +6,7 @@ import type { ActorSubclass } from "@dfinity/agent";
 
 
 // Vitest unfortunately doesn't load the entire vite.config.ts file,
-// so we have to do some black magic to get the agent/actor.
+// so we have to create another agent/actor here from the declarations.
 // we do have access to STATIC_CONTEXT and the process.env variables.
 // Also we lose our types because we import only the JS. This isn't a good
 // solution but it works for now.
